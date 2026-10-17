@@ -1,0 +1,7 @@
+.admin-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.admin-toolbar .search { flex: 1; min-width: 220px; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 14px; background: #fff; }
+.admin-toolbar select { padding: 10px 14px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: #fff; font-size: 14px; }
+.admin-actions { display: flex; gap: 6px; }
+.deployment-row { display: grid; grid-template-columns: 80px 1fr auto; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--color-border); }
+.deployment-row .version { font-weight: 700; font-size: 13px; }
+.deployment-row .env { display: inline-block; padding: 2px 8px; border-radius: var(--radius-pill); font-size: 11px; font-weight: 600; background: var(--fk-slate-100); color: var(--fk-slate-700); }

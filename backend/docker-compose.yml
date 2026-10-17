@@ -1,0 +1,65 @@
+# ============================================================
+# FloorballKenya Backend — Local Docker Compose
+# ============================================================
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: floorballkenya-api:latest
+    container_name: floorballkenya-api
+    restart: unless-stopped
+
+    # Load environment variables from .env
+    env_file:
+      - .env
+
+    # Override anything that needs to be container-specific
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      DEBUG: ${DEBUG:-true}
+
+    ports:
+      - "8000:8000"
+
+    # Mount source for live reload during dev (comment out for prod)
+    volumes:
+      - ./app:/app/app:ro
+
+    # Health check (mirrors Dockerfile)
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health').status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+    networks:
+      - floorball-net
+
+
+  # ---------- Optional: run with live reload (dev) ----------
+  # Usage:  docker compose --profile dev up
+  api-dev:
+    profiles: ["dev"]
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: floorballkenya-api:dev
+    container_name: floorballkenya-api-dev
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    env_file:
+      - .env
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./app:/app/app
+    networks:
+      - floorball-net
+
+
+networks:
+  floorball-net:
+    driver: bridge

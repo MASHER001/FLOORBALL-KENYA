@@ -1,82 +1,182 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    />
+  <title>FloorballKenya — Official Floorball Platform for Kenya</title>
+  <meta name="description"
+        content="FloorballKenya is the official platform for floorball in Kenya — leagues, tournaments, teams, players, live standings, and a marketplace." />
+  <meta name="theme-color" content="#0F5132" />
 
-    <meta
-        name="description"
-        content="FloorballKenya.com - Kenya's digital floorball hub for leagues, tournaments, teams, players, statistics and floorball equipment."
-    />
+  <!-- Favicon -->
+  <link rel="icon" href="/FloorballKenya/frontend/assets/img/logo/image.png" />
 
-    <meta
-        name="keywords"
-        content="Floorball Kenya, floorball, floorball Kenya leagues, floorball tournaments, floorball teams, floorball players, floorball equipment"
-    />
+  <!-- Fonts (Poppins, matches the design system) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <meta
-        name="author"
-        content="FloorballKenya.com"
-    />
-
-    <meta
-        name="theme-color"
-        content="#111827"
-    />
-
-    <title>FloorballKenya.com | Kenya's Floorball Hub</title>
-
-    <!-- Favicon -->
-    <link
-        rel="icon"
-        type="image/png"
-        href="/images/logo.png"
-    />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    />
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    />
-
-    <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
+  <!-- One stylesheet; it @imports the rest -->
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/style.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/pages.css" />
 </head>
-
 <body>
 
-    <!-- React Application -->
-    <div id="root"></div>
+  <header id="navbar"></header>
 
-    <!-- React Entry Point -->
-    <script
-        type="module"
-        src="/src/main.jsx"
-    ></script>
+  <main>
 
-    <noscript>
-        <div style="padding: 40px; text-align: center;">
-            <h1>FloorballKenya.com</h1>
-            <p>
-                JavaScript is required to use this website.
-                Please enable JavaScript in your browser.
-            </p>
+    <!-- SECTION 1 — HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content page-enter">
+          <span class="hero-eyebrow">Official Floorball Platform · Kenya</span>
+          <h1>Floorball in Kenya,<br />all in one place.</h1>
+          <p>
+            Leagues, tournaments, teams, players, live standings and a full
+            marketplace — built for the Kenyan floorball community.
+          </p>
+          <div class="hero-actions">
+            <a href="/FloorballKenya/frontend/pages/sports/leagues.html" class="btn btn-primary btn-lg">
+              Explore Leagues
+            </a>
+            <a href="/FloorballKenya/frontend/pages/shop/shop.html" class="btn btn-outline-light btn-lg">
+              Visit Shop
+            </a>
+          </div>
         </div>
-    </noscript>
+      </div>
+    </section>
 
+    <!-- SECTION 2 — LIVE STATS -->
+    <div class="container">
+      <div class="stats-strip animate-slide-up" id="hero-stats">
+        <div class="stat-item"><div class="stat-value">—</div><div class="stat-label">Leagues</div></div>
+        <div class="stat-item"><div class="stat-value">—</div><div class="stat-label">Teams</div></div>
+        <div class="stat-item"><div class="stat-value">—</div><div class="stat-label">Players</div></div>
+        <div class="stat-item"><div class="stat-value">—</div><div class="stat-label">Tournaments</div></div>
+      </div>
+    </div>
+
+    <!-- SECTION 3 — ACTIVE LEAGUES -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="eyebrow">Competitions</span>
+          <h2 class="section-title">Active leagues</h2>
+          <p class="section-subtitle">Follow standings, fixtures and results in real time.</p>
+        </div>
+        <div id="home-leagues"></div>
+        <div class="text-center mt-8">
+          <a href="/FloorballKenya/frontend/pages/sports/leagues.html" class="btn btn-secondary">View all leagues</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 — NEXT FIXTURES -->
+    <section class="section section-white">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="eyebrow eyebrow-red">Upcoming</span>
+          <h2 class="section-title">Next fixtures</h2>
+          <p class="section-subtitle">Where the action happens next.</p>
+        </div>
+        <div id="home-matches"></div>
+        <div class="text-center mt-8">
+          <a href="/FloorballKenya/frontend/pages/sports/matches.html" class="btn btn-secondary">See all fixtures</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5 — FEATURED TEAMS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="eyebrow">Clubs</span>
+          <h2 class="section-title">Featured teams</h2>
+          <p class="section-subtitle">Meet the clubs building floorball in Kenya.</p>
+        </div>
+        <div id="home-teams"></div>
+        <div class="text-center mt-8">
+          <a href="/FloorballKenya/frontend/pages/sports/teams.html" class="btn btn-secondary">All teams</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6 — MARKETPLACE -->
+    <section class="section section-dark">
+      <div class="container text-center">
+        <span class="eyebrow eyebrow-light">Marketplace</span>
+        <h2 class="section-title section-title-light">Gear up for the game</h2>
+        <p class="section-subtitle section-subtitle-light">
+          Sticks, balls, jerseys, goalkeeper kits and more — from verified Kenyan vendors.
+          Pay with M-Pesa in seconds.
+        </p>
+        <div class="flex-center gap-4 flex-wrap mt-8">
+          <a href="/FloorballKenya/frontend/pages/shop/shop.html" class="btn btn-primary btn-lg">Shop now</a>
+          <a href="/FloorballKenya/frontend/pages/auth/register.html" class="btn btn-outline-light btn-lg">Become a vendor</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7 — NEWS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="eyebrow">Newsroom</span>
+          <h2 class="section-title">Latest from the floor</h2>
+        </div>
+        <div id="home-news"></div>
+        <div class="text-center mt-8">
+          <a href="/FloorballKenya/frontend/pages/public/news.html" class="btn btn-secondary">All news</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8 — FINAL CTA -->
+    <section class="section section-lg">
+      <div class="container text-center">
+        <h2 class="section-title">Ready to play?</h2>
+        <p class="section-subtitle section-subtitle-narrow">
+          Register a team, join a league, or start selling gear on the marketplace.
+        </p>
+        <div class="flex-center gap-4 flex-wrap mt-8">
+          <a href="/FloorballKenya/frontend/pages/auth/register.html" class="btn btn-primary btn-lg">Create account</a>
+          <a href="/FloorballKenya/frontend/pages/auth/login.html" class="btn btn-secondary btn-lg">Sign in</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer"></footer>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ✏️  EDITABLE SCRIPT IMPORTS
+       ═══════════════════════════════════════════════════════════
+       JS module imports CANNOT use relative paths without a prefix.
+       They must start with "/", "./", or "../".
+
+       If the site is served from the domain root (http://localhost:5500/)
+         → paths start with  /js/...
+
+       If served from a subfolder (http://localhost:5500/frontend/)
+         → change the BASE constant below to "/frontend"
+           (or the file's prefix accordingly).
+       ═══════════════════════════════════════════════════════════ -->
+    <script type="module">
+    const BASE = "/FloorballKenya/frontend";
+
+    const { renderNavbar } = await import(`${BASE}/js/components/navbar.js`);
+    const { renderFooter } = await import(`${BASE}/js/components/footer.js`);
+    const { initHome }     = await import(`${BASE}/js/pages/home.js`);
+    const { scrollReveal } = await import(`${BASE}/js/utils.js`);
+
+    renderNavbar();
+    renderFooter();
+    scrollReveal();
+    initHome();
+  </script>
 </body>
 </html>

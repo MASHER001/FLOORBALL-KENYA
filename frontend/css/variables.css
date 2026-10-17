@@ -1,0 +1,57 @@
+:root {
+  --fk-green: #0F5132;
+  --fk-green-600: #166534;
+  --fk-green-500: #16A34A;
+  --fk-green-100: #DCFCE7;
+  --fk-red: #C8102E;
+  --fk-red-600: #A80D26;
+  --fk-red-100: #FEE2E2;
+  --fk-black: #0A0A0A;
+  --fk-ink: #111827;
+  --fk-slate-700: #374151;
+  --fk-slate-500: #6B7280;
+  --fk-slate-300: #D1D5DB;
+  --fk-slate-200: #E5E7EB;
+  --fk-slate-100: #F3F4F6;
+  --fk-slate-50: #F9FAFB;
+  --fk-gold: #C99A2E;
+  --fk-white: #FFFFFF;
+
+  --color-bg: var(--fk-white);
+  --color-surface: var(--fk-white);
+  --color-surface-alt: var(--fk-slate-50);
+  --color-border: var(--fk-slate-200);
+  --color-text: var(--fk-ink);
+  --color-text-muted: var(--fk-slate-500);
+  --color-primary: var(--fk-green);
+  --color-accent: var(--fk-red);
+  --color-success: var(--fk-green-500);
+  --color-warning: #B45309;
+  --color-danger: var(--fk-red);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(15,23,42,.05);
+  --shadow-md: 0 4px 12px rgba(15,23,42,.08);
+  --shadow-lg: 0 12px 32px rgba(15,23,42,.12);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --font-sans: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Poppins", system-ui, sans-serif;
+
+  --container: 1200px;
+  --nav-height: 68px;
+}

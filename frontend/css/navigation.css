@@ -1,0 +1,6 @@
+.breadcrumbs { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--color-text-muted); padding: 14px 0; }
+.breadcrumbs a { color: var(--fk-slate-700); }
+.breadcrumbs .current { color: var(--fk-ink); font-weight: 600; }
+.breadcrumbs .sep { color: var(--fk-slate-300); }
+.mobile-drawer-toggle { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; }
+@media (max-width: 768px) { .mobile-drawer-toggle { display: inline-flex; } }

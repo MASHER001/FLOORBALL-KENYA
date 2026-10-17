@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — FloorballKenya</title>
+  <meta name="description" content="FloorballKenya is the official platform for floorball in Kenya." />
+  <link rel="icon" href="/FloorballKenya/frontend/assets/img/icons/image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/animations.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/variables.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/style.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/components.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/pages.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/animations.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/responsive.css" />
+</head>
+<body>
+  <header id="navbar"></header>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a href="/FloorballKenya/frontend/index.html">Home</a> <span>/</span> <span>About</span>
+        </div>
+        <h1>About FloorballKenya</h1>
+        <p class="text-muted">The official platform powering floorball in Kenya.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container" style="max-width: 780px;">
+        <h2 style="margin-bottom: var(--sp-4);">Our mission</h2>
+        <p style="margin-bottom: var(--sp-8); font-size: var(--fs-md);">
+          FloorballKenya exists to grow the sport of floorball across the country — connecting teams, players, leagues, tournaments, and fans in one modern platform. From grassroots youth programs to national championships, we provide the digital infrastructure that the sport needs to thrive.
+        </p>
+
+        <h2 style="margin-bottom: var(--sp-4);">What we offer</h2>
+        <div class="grid grid-2" style="margin-bottom: var(--sp-8);">
+          <div class="card"><div class="card-body">
+            <div class="card-title">🏑 League Management</div>
+            <p class="card-text">Full fixtures, results, live standings, and player statistics — updated automatically.</p>
+          </div></div>
+          <div class="card"><div class="card-body">
+            <div class="card-title">🛒 Marketplace</div>
+            <p class="card-text">Sticks, balls, jerseys, and gear from verified Kenyan vendors, with M-Pesa checkout.</p>
+          </div></div>
+          <div class="card"><div class="card-body">
+            <div class="card-title">👥 Team & Player Hub</div>
+            <p class="card-text">Every team has a profile. Every player has stats. Every match tells a story.</p>
+          </div></div>
+          <div class="card"><div class="card-body">
+            <div class="card-title">📊 Live Standings</div>
+            <p class="card-text">League tables recalculated automatically after every completed match.</p>
+          </div></div>
+        </div>
+
+        <h2 style="margin-bottom: var(--sp-4);">Contact us</h2>
+        <p style="margin-bottom: var(--sp-4);">
+          Questions, partnerships, or press inquiries? Reach out via our
+          <a href="/FloorballKenya/frontend/pages/public/contact.html">contact page</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer"></footer>
+
+  <script type="module">
+    import { renderNavbar } from "../../js/components/navbar.js";
+    import { renderFooter } from "../../js/components/footer.js";
+    import { initAbout }    from "../../js/pages/about.js";
+
+    renderNavbar();
+    renderFooter();
+    initAbout();
+  </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+@keyframes fkSpin { to { transform: rotate(360deg); } }
+@keyframes fkToastIn { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes fkFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.fade-in { animation: fkFadeIn .3s ease both; }

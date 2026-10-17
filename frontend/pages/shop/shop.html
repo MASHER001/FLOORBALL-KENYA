@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — FloorballKenya</title>
+  <link rel="icon" href="/FloorballKenya/frontend/assets/img/icons/image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/animations.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/variables.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/style.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/components.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/pages.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/animations.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/responsive.css" />
+</head>
+<body>
+  <header id="navbar"></header>
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <div class="breadcrumbs"><a href="/FloorballKenya/frontend/index.html">Home</a> <span>/</span> <span>Shop</span></div>
+        <h1>Shop</h1>
+        <p class="text-muted">Sticks, balls, jerseys, goalkeeper kits and more.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="card" style="margin-bottom: var(--sp-8);">
+          <div class="card-body">
+            <div class="grid grid-2 md-grid-1" style="gap: var(--sp-4);">
+              <input type="search" id="shop-search" class="form-control" placeholder="Search products…" />
+              <select id="shop-category" class="form-select">
+                <option value="">All categories</option>
+              </select>
+            </div>
+            <div class="flex gap-4 flex-wrap mt-4" style="align-items:center;">
+              <input type="number" id="shop-min-price" class="form-control" placeholder="Min price" style="max-width: 160px;" />
+              <input type="number" id="shop-max-price" class="form-control" placeholder="Max price" style="max-width: 160px;" />
+              <label class="form-check">
+                <input type="checkbox" id="shop-in-stock" />
+                In stock only
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div id="shop-grid"></div>
+        <div id="shop-pagination"></div>
+      </div>
+    </section>
+  </main>
+  <footer id="footer"></footer>
+  <script type="module">
+    import { renderNavbar } from "../../js/components/navbar.js";
+    import { renderFooter } from "../../js/components/footer.js";
+    import { initShop }     from "../../js/pages/shop.js";
+    renderNavbar(); renderFooter(); initShop();
+  </script>
+</body>
+</html>

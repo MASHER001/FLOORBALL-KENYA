@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matches — FloorballKenya</title>
+  <link rel="icon" href="/FloorballKenya/frontend/assets/img/logo/image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/animations.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/variables.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/style.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/components.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/pages.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/animations.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/responsive.css" />
+</head>
+<body>
+  <header id="navbar"></header>
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <div class="breadcrumbs"><a href="/FloorballKenya/frontend/index.html">Home</a> <span>/</span> <span>Matches</span></div>
+        <h1>Matches</h1>
+        <p class="text-muted">Fixtures, live scores and results.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="flex gap-4 flex-wrap mb-8">
+          <select id="matches-status" class="form-select" style="max-width: 220px;">
+            <option value="scheduled">Upcoming fixtures</option>
+            <option value="live">Live now</option>
+            <option value="completed">Results</option>
+            <option value="">All matches</option>
+          </select>
+          <select id="matches-team" class="form-select" style="max-width: 260px;">
+            <option value="">All teams</option>
+          </select>
+        </div>
+
+        <div id="matches-list"></div>
+        <div id="matches-pagination"></div>
+      </div>
+    </section>
+  </main>
+  <footer id="footer"></footer>
+  <script type="module">
+    import { renderNavbar } from "../../js/components/navbar.js";
+    import { renderFooter } from "../../js/components/footer.js";
+    import { initMatches }  from "../../js/pages/matches.js";
+    renderNavbar(); renderFooter(); initMatches();
+  </script>
+</body>
+</html>

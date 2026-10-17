@@ -1,0 +1,9 @@
+.ad-banner { position: relative; border-radius: var(--radius-md); overflow: hidden; background: linear-gradient(135deg, var(--fk-green) 0%, #0B3B23 100%); color: #fff; padding: 28px; display: flex; justify-content: space-between; align-items: center; gap: 20px; min-height: 140px; }
+.ad-banner h3 { color: #fff; font-size: 22px; margin-bottom: 6px; }
+.ad-banner p { color: rgba(255,255,255,.85); }
+.sponsored-label { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,.4); color: #fff; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; padding: 3px 8px; border-radius: var(--radius-pill); }
+.ad-slot { margin-block: 24px; }
+.ad-slot[data-empty="true"] { display: none; }
+.sponsor-strip { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: center; padding: 20px 0; }
+.sponsor-strip img { max-height: 44px; opacity: .7; transition: opacity .15s; }
+.sponsor-strip img:hover { opacity: 1; }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create account — FloorballKenya</title>
+  <link rel="icon" href="/FloorballKenya/frontend/assets/img/icons/image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/animations.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/variables.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/style.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/components.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/pages.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/animations.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/responsive.css" />
+</head>
+<body>
+  <header id="navbar"></header>
+
+  <main>
+    <div class="auth-wrapper">
+      <div class="auth-card animate-scale-in" style="max-width: 560px;">
+        <h1>Create your account</h1>
+        <p class="subtitle">Join the Kenyan floorball community</p>
+
+        <form id="register-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="full_name">Full name</label>
+            <input type="text" id="full_name" name="full_name" class="form-control" required
+                   autocomplete="name" placeholder="John Kamau" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email address</label>
+            <input type="email" id="email" name="email" class="form-control" required
+                   autocomplete="email" placeholder="you@example.com" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone number (optional)</label>
+            <input type="tel" id="phone" name="phone" class="form-control"
+                   autocomplete="tel" placeholder="0712345678" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="role">I am a…</label>
+            <select id="role" name="role" class="form-select" required>
+              <option value="player">Player</option>
+              <option value="team_manager">Team Manager</option>
+              <option value="vendor">Vendor</option>
+              <option value="customer" selected>Customer / Fan</option>
+            </select>
+            <div class="form-help" id="role-hint"></div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="password">Password</label>
+              <input type="password" id="password" name="password" class="form-control" required
+                     autocomplete="new-password" placeholder="At least 8 characters" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="confirm_password">Confirm password</label>
+              <input type="password" id="confirm_password" name="confirm_password" class="form-control" required
+                     autocomplete="new-password" placeholder="Repeat password" />
+            </div>
+          </div>
+
+          <label class="form-check" style="margin-bottom: var(--sp-5);">
+            <input type="checkbox" required />
+            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-full">
+            Create account
+          </button>
+        </form>
+
+        <p class="auth-footer">
+          Already have an account?
+          <a href="/FloorballKenya/frontend/pages/auth/login.html">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer id="footer"></footer>
+
+  <script type="module">
+    import { renderNavbar } from "../../js/components/navbar.js";
+    import { renderFooter } from "../../js/components/footer.js";
+    import { initRegister } from "../../js/pages/register.js";
+
+    renderNavbar();
+    renderFooter();
+    initRegister();
+  </script>
+</body>
+</html>

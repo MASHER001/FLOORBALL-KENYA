@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/FloorballKenya/frontend/assets/img/icons/image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/reset.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/animations.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/style.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/components.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/pages.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/animations.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/responsive.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/variables.css" />
+  <title>Teams — FloorballKenya</title>
+</head>
+<body>
+  <header id="navbar"></header>
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <div class="breadcrumbs"><a href="/FloorballKenya/frontend/index.html">Home</a> <span>/</span> <span>Teams</span></div>
+        <h1>Teams</h1>
+        <p class="text-muted">Every club playing floorball across Kenya.</p>
+      </div>
+    </div>
+    <section class="section">
+      <div class="container">
+        <div class="form-group" style="max-width: 480px; margin-bottom: var(--sp-8);">
+          <input type="search" id="teams-search" class="form-control" placeholder="Search teams by name…" />
+        </div>
+        <div id="teams-list"></div>
+        <div id="teams-pagination"></div>
+      </div>
+    </section>
+  </main>
+  <footer id="footer"></footer>
+  <script type="module">
+    import { renderNavbar } from "../../js/components/navbar.js";
+    import { renderFooter } from "../../js/components/footer.js";
+    import { initTeams }    from "../../js/pages/teams.js";
+    renderNavbar(); renderFooter(); initTeams();
+  </script>
+</body>
+</html>

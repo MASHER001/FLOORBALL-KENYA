@@ -1,0 +1,12 @@
+@media (max-width: 1024px) { :root { --container: 100%; } }
+@media (max-width: 768px) {
+  h1 { font-size: 30px; }
+  h2 { font-size: 22px; }
+  .section { padding-block: 36px; }
+  .stat-strip .stat { border-right: 0; border-bottom: 1px solid var(--color-border); }
+  .stat-strip .stat:last-child { border-bottom: 0; }
+}
+@media (max-width: 480px) {
+  .container { padding-inline: 16px; }
+  .btn { padding: 10px 16px; font-size: 13px; }
+}

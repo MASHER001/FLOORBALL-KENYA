@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>FloorballKenya â€” Official Floorball Platform for Kenya</title>
+  <meta name="description"
+        content="FloorballKenya is the official platform for floorball in Kenya â€” leagues, tournaments, teams, players, live standings, and a marketplace." />
+  <meta name="theme-color" content="#006B3F" />
+
+  <!-- ============================================================
+       âœï¸  EDITABLE PATHS â€” change these in ONE place
+       ============================================================
+       Leave BASE as "/" if served from the site root.
+       If served from a subfolder, set BASE to that folder
+       (e.g. "/FloorballKenya/frontend/").
+       ============================================================ -->
+
+  <base href="/" id="site-base" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/img/logo/favicon.ico" />
+
+  <!-- Fonts (external CDN) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/animations.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/components.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/pages.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/reset.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/responsive.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/style.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/variables.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR â€” rendered by /js/components/navbar.js
+       ============================================================ -->
+  <header id="navbar"></header>
+
+  <main>
+
+    <!-- ============================================================
+         SECTION 1 â€” HERO
+         ============================================================ -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content page-enter">
+          <span class="hero-eyebrow">Official Floorball Platform Â· Kenya</span>
+          <h1>Floorball in Kenya,<br />all in one place.</h1>
+          <p>
+            Leagues, tournaments, teams, players, live standings and a full
+            marketplace â€” built for the Kenyan floorball community.
+          </p>
+          <div class="hero-actions">
+            <a href="pages/sports/leagues.html" class="btn btn-primary btn-lg">
+              Explore Leagues
+            </a>
+            <a href="pages/shop/shop.html" class="btn btn-outline-light btn-lg">
+              Visit Shop
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2 â€” LIVE STATS
+         ============================================================ -->
+    <div class="container">
+      <div class="stats-strip animate-slide-up" id="hero-stats">
+        <div class="stat-item">
+          <div class="stat-value">â€”</div>
+          <div class="stat-label">Leagues</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">â€”</div>
+          <div class="stat-label">Teams</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">â€”</div>
+          <div class="stat-label">Players</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">â€”</div>
+          <div class="stat-label">Tournaments</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         SECTION 3 â€” ACTIVE LEAGUES
+         Filled by /js/pages/home.js
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="eyebrow">Competitions</span>
+          <h2 class="section-title">Active leagues</h2>
+          <p class="section-subtitle">Follow standings, fixtures and results in real time.</p>
+        </div>
+
+        <div id="home-leagues"></div>
+
+        <div class="text-center mt-8">
+          <a href="pages/sports/leagues.html" class="btn btn-secondary">View all leagues</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4 â€” NEXT FIXTURES
+         ============================================================ -->
+    <section class="section section-white">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="eyebrow eyebrow-red">Upcoming</span>
+          <h2 class="section-title">Next fixtures</h2>
+          <p class="section-subtitle">Where the action happens next.</p>
+        </div>
+
+        <div id="home-matches"></div>
+
+        <div class="text-center mt-8">
+          <a href="pages/sports/matches.html" class="btn btn-secondary">See all fixtures</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5 â€” FEATURED TEAMS
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="eyebrow">Clubs</span>
+          <h2 class="section-title">Featured teams</h2>
+          <p class="section-subtitle">Meet the clubs building floorball in Kenya.</p>
+        </div>
+
+        <div id="home-teams"></div>
+
+        <div class="text-center mt-8">
+          <a href="pages/sports/teams.html" class="btn btn-secondary">All teams</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6 â€” MARKETPLACE CALL-TO-ACTION
+         ============================================================ -->
+    <section class="section section-dark">
+      <div class="container text-center">
+        <span class="eyebrow eyebrow-light">Marketplace</span>
+        <h2 class="section-title section-title-light">Gear up for the game</h2>
+        <p class="section-subtitle section-subtitle-light">
+          Sticks, balls, jerseys, goalkeeper kits and more â€” from verified Kenyan vendors.
+          Pay with M-Pesa in seconds.
+        </p>
+        <div class="flex-center gap-4 flex-wrap mt-8">
+          <a href="pages/shop/shop.html" class="btn btn-primary btn-lg">Shop now</a>
+          <a href="pages/auth/register.html" class="btn btn-outline-light btn-lg">Become a vendor</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7 â€” LATEST NEWS
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="eyebrow">Newsroom</span>
+          <h2 class="section-title">Latest from the floor</h2>
+        </div>
+
+        <div id="home-news"></div>
+
+        <div class="text-center mt-8">
+          <a href="pages/public/news.html" class="btn btn-secondary">All news</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8 â€” FINAL CALL-TO-ACTION
+         ============================================================ -->
+    <section class="section section-lg">
+      <div class="container text-center">
+        <h2 class="section-title">Ready to play?</h2>
+        <p class="section-subtitle section-subtitle-narrow">
+          Register a team, join a league, or start selling gear on the marketplace.
+        </p>
+        <div class="flex-center gap-4 flex-wrap mt-8">
+          <a href="pages/auth/register.html" class="btn btn-primary btn-lg">Create account</a>
+          <a href="pages/auth/login.html" class="btn btn-secondary btn-lg">Sign in</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER â€” rendered by /js/components/footer.js
+       ============================================================ -->
+  <footer id="footer"></footer>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script type="module">
+  import { renderNavbar } from "frontend/js/components/navbar.js";
+  import { renderFooter } from "frontend/js/components/footer.js";
+  import { initHome }     from "frontend/js/pages/home.js";
+  import { scrollReveal } from "frontend/js/utils.js";
+
+  renderNavbar();
+  renderFooter();
+  scrollReveal();
+  initHome();
+</script>
+
+</body>
+</html>
+

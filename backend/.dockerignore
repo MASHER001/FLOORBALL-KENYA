@@ -1,0 +1,37 @@
+# Git
+.git
+.gitignore
+
+# Env & secrets (CRITICAL — never ship .env into an image)
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docs & misc
+README.md
+*.md
+*.log
+Dockerfile
+docker-compose.yml
+
+# Local data
+data/
+uploads/

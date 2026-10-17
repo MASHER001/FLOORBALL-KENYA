@@ -1,0 +1,21 @@
+.fixture { display: grid; grid-template-columns: auto 1fr auto 1fr auto; gap: 14px; align-items: center; padding: 14px 18px; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-md); margin-bottom: 10px; }
+.fixture .team { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.fixture .team img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+.fixture .vs { padding: 6px 12px; background: var(--fk-slate-100); border-radius: var(--radius-sm); font-size: 12px; font-weight: 700; color: var(--fk-slate-700); min-width: 48px; text-align: center; }
+.fixture .score { font-size: 18px; font-weight: 800; letter-spacing: .02em; min-width: 48px; text-align: center; }
+.fixture .meta { font-size: 12px; color: var(--color-text-muted); }
+
+table.standings th:nth-child(1), table.standings td:nth-child(1) { width: 40px; text-align: center; }
+table.standings td:nth-child(1) { font-weight: 700; }
+table.standings td.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.standings tbody tr.qualify-1 { border-left: 3px solid var(--fk-green-500); }
+table.standings tbody tr.qualify-2 { border-left: 3px solid var(--fk-green-100); }
+
+.bracket { display: grid; gap: 24px; }
+.bracket-round { display: grid; gap: 12px; }
+.bracket-match { padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: #fff; font-size: 13px; }
+
+.group-block { border: 1px solid var(--color-border); border-radius: var(--radius-md); background: #fff; overflow: hidden; }
+.group-block .group-header { padding: 12px 16px; background: var(--fk-slate-50); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; }
+.group-block ul { list-style: none; padding: 0; margin: 0; }
+.group-block li { padding: 10px 16px; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; }
