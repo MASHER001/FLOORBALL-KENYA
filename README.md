@@ -262,4 +262,4 @@ Contributions and suggestions are welcome.
 A license has not yet been specified. Add a LICENSE file before distributing or accepting contributions under an open-source license. Until then, do not assume the project is open source.
 Contact
 Project: FloorballKenya
-GitHub repository: https://github.com/MASHER001/FLOO
+GitHub repository: https://github.com/MASHER001/FLOORBALL-KENYA
