@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Gallery — FloorballKenya</title>
+  <meta name="description"
+        content="Moments, teams and passion from FloorballKenya — match day photos, tournament highlights, team portraits and event coverage." />
+  <meta name="theme-color" content="#0F5132" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/FloorballKenya/frontend/assets/img/logo/image.png" />
+
+  <!-- Fonts (Poppins, matches the design system) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- One stylesheet; it @imports the rest -->
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/style.css" />
+  <link rel="stylesheet" href="/FloorballKenya/frontend/css/pages.css" />
+</head>
+<body>
+
+  <header id="navbar"></header>
+
+  <main>
+
+    <!-- SECTION 1 — GALLERY HEADER -->
+    <section class="gallery-hero">
+      <div class="container">
+        <h1>Gallery</h1>
+        <p>Moments. Teams. Passion. FloorballKenya.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2 — FILTERS + GRID -->
+    <section class="section">
+      <div class="container">
+
+        <div class="gallery-filters" id="gallery-filters" role="tablist" aria-label="Filter gallery">
+          <button type="button" class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button type="button" class="filter-tab" data-filter="matches" role="tab" aria-selected="false">Matches</button>
+          <button type="button" class="filter-tab" data-filter="tournaments" role="tab" aria-selected="false">Tournaments</button>
+          <button type="button" class="filter-tab" data-filter="teams" role="tab" aria-selected="false">Teams</button>
+          <button type="button" class="filter-tab" data-filter="events" role="tab" aria-selected="false">Events</button>
+        </div>
+
+        <div class="gallery-grid" id="gallery-grid">
+          <!-- JS fills this with .gallery-item cards from /api/v1/gallery/media -->
+        </div>
+
+        <div class="gallery-empty" id="gallery-empty" hidden>
+          <p>No photos in this category yet.</p>
+        </div>
+
+        <div class="text-center mt-8">
+          <button type="button" class="btn btn-secondary" id="gallery-load-more" hidden>Load more</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer"></footer>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ✏️  EDITABLE SCRIPT IMPORTS
+       ═══════════════════════════════════════════════════════════
+       JS module imports CANNOT use relative paths without a prefix.
+       They must start with "/", "./", or "../".
+       ═══════════════════════════════════════════════════════════ -->
+  <script type="module">
+    const BASE = "/FloorballKenya/frontend";
+
+    const { renderNavbar } = await import(`${BASE}/js/components/navbar.js`);
+    const { renderFooter } = await import(`${BASE}/js/components/footer.js`);
+    const { initGallery }  = await import(`${BASE}/js/pages/gallery.js`);
+    const { scrollReveal } = await import(`${BASE}/js/utils.js`);
+
+    renderNavbar();
+    renderFooter();
+    scrollReveal();
+    initGallery();
+  </script>
+</body>
+</html>

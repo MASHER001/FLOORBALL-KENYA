@@ -6,10 +6,14 @@ Provides two clients:
     - get_supabase()        -> anon key (respects RLS, for user-facing ops)
     - get_supabase_admin()  -> service_role key (bypasses RLS, for admin ops)
 
-Both are cached singletons.
+Neither is cached: FastAPI runs sync route handlers in a thread-pool, and a
+single shared httpx/HTTP2 connection reused across concurrent threads was
+corrupting its compression state under load (RemoteProtocolError /
+ConnectionTerminated error_code:9, followed by a KeyError in httpcore's
+stream cleanup). Building a fresh client per call avoids that entirely —
+same pattern get_supabase_for_user() already used, which is why it never
+hit the bug.
 """
-
-from functools import lru_cache
 
 from supabase import Client, create_client
 from supabase.lib.client_options import ClientOptions
@@ -26,7 +30,6 @@ def _client_options() -> ClientOptions:
     )
 
 
-@lru_cache
 def get_supabase() -> Client:
     """Anonymous client — respects Row Level Security."""
     if not settings.SUPABASE_URL or not settings.SUPABASE_ANON_KEY:
@@ -38,7 +41,6 @@ def get_supabase() -> Client:
     )
 
 
-@lru_cache
 def get_supabase_admin() -> Client:
     """Service-role client — bypasses Row Level Security."""
     if not settings.SUPABASE_URL or not settings.SUPABASE_SERVICE_ROLE_KEY:

@@ -53,3 +53,26 @@
 .alert-success { background: var(--fk-green-100); color: var(--fk-green-600); border-color: #A7F3D0; }
 .alert-warning { background: #FEF3C7; color: #92400E; border-color: #FDE68A; }
 .alert-danger { background: var(--fk-red-100); color: var(--fk-red-600); border-color: #FECACA; }
+.cart-count {
+  position: absolute; top: 2px; right: 0;
+  background: var(--fk-green); color: #fff;
+  font-size: 10px; font-weight: 700;
+  min-width: 15px; height: 15px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0 3px;
+}
+
+.user-chip {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 10px 4px 4px;
+  border-radius: 999px;
+  text-decoration: none; color: inherit;
+  font-size: 13px; font-weight: 600;
+}
+.user-chip:hover { background: var(--fk-slate-100); }
+
+.flag-badge {
+  font-size: 18px;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px;
+}

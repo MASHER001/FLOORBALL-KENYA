@@ -1,36 +1,36 @@
 /**
  * Navbar component
  * ================
- * Renders the site navigation into <header id="navbar"></header>.
+ * Renders into <header id="navbar"></header> using the shared design-system
+ * classes from layout.css: .site-header / .site-header__inner / .brand /
+ * .site-nav / .header-actions / .icon-btn / .avatar / .nav-toggle.
  *
- * · Public links always visible
- * · Auth links (Dashboard, Logout) shown when logged in
- * · Login/Register shown when logged out
- * · Mobile drawer toggle
- * · Cart badge with live count
- * · Active page highlighting
+ * Mobile menu: there is ONE .site-nav list. On mobile it's hidden by
+ * responsive.css; toggling adds/removes .open on the <header class="site-header">
+ * itself, which responsive.css uses to show .site-nav as a dropdown
+ * (see .site-header.open .site-nav in layout.css).
  */
 
 import { CONFIG, dashboardFor } from "../config.js";
 import { getSession, isLoggedIn, logout } from "../auth.js";
 import { escapeHtml, notify } from "../ui.js";
 
+const BASE = "/FloorballKenya/frontend";
+
 const NAV_LINKS = [
-  { label: "Home",        href: "/index.html" },
-  { label: "Leagues",     href: "/pages/sports/leagues.html" },
-  { label: "Tournaments", href: "/pages/sports/tournaments.html" },
-  { label: "Teams",       href: "/pages/sports/teams.html" },
-  { label: "Players",     href: "/pages/sports/players.html" },
-  { label: "Shop",        href: "/pages/shop/shop.html" },
-  { label: "News",        href: "/pages/public/news.html" },
+  { label: "Home",        href: "/FloorballKenya/frontend/index.html" },
+  { label: "Leagues",     href: "/FloorballKenya/frontend/pages/sports/leagues.html" },
+  { label: "Tournaments", href: "/FloorballKenya/frontend/pages/sports/tournaments.html" },
+  { label: "Teams",       href: "/FloorballKenya/frontend/pages/sports/teams.html" },
+  { label: "Players",     href: "/FloorballKenya/frontend/pages/sports/players.html" },
+  { label: "Shop",        href: "/FloorballKenya/frontend/pages/shop/shop.html" },
+  { label: "News",        href: "/FloorballKenya/frontend/pages/public/news.html" },
 ];
 
 /** Are we currently on the page pointed to by `href`? */
 function isActive(href) {
   const path = window.location.pathname;
-  // Exact match, or href is a folder + we're on a child page
   if (path === href) return true;
-  // Handle index.html at root
   if (href === "/index.html" && (path === "/" || path === "/index.html")) return true;
   return false;
 }
@@ -42,38 +42,59 @@ async function getCartCount() {
   return 0;
 }
 
-function navLinksHtml(mobile = false) {
-  const cls = mobile ? "mobile-nav-link" : "nav-link";
+function initialsFor(name) {
+  if (!name) return "?";
+  const parts = name.trim().split(/\s+/);
+  return parts.slice(0, 2).map((p) => p[0]?.toUpperCase() || "").join("");
+}
+
+function navLinksHtml() {
   return NAV_LINKS.map(
-    (l) => `
-    <a href="${l.href}" class="${cls}${isActive(l.href) ? " active" : ""}">
-      ${escapeHtml(l.label)}
-    </a>
-  `
+    (l) => `<a href="${l.href}"${isActive(l.href) ? ' class="active"' : ""}>${escapeHtml(l.label)}</a>`
   ).join("");
 }
 
-function authAreaHtml(mobile = false) {
+/** Search / notifications / flag — small icon cluster inside .header-actions. */
+function iconClusterHtml() {
+  return `
+    <button type="button" class="icon-btn" id="nav-search-btn" aria-label="Search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </button>
+    <button type="button" class="icon-btn" id="nav-notify-btn" aria-label="Notifications">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+      </svg>
+      <span class="dot" id="notify-dot" hidden></span>
+    </button>
+    <span class="flag-badge" aria-label="Kenya" title="Kenya">🇰🇪</span>
+  `;
+}
+
+function authAreaHtml() {
   const { user } = getSession();
-  const cls = mobile ? "mobile-nav-link" : "nav-link";
 
   if (user) {
     const dashHref = dashboardFor(user.role);
     const displayName = user.full_name || user.email || "Account";
     return `
-      <a href="${CONFIG.ROUTES.CART}" class="nav-icon-btn" aria-label="Cart">
+      <a href="${CONFIG.ROUTES.CART}" class="icon-btn" aria-label="Cart">
         🛒 <span class="cart-count" id="cart-count">0</span>
       </a>
-      <a href="${dashHref}" class="${cls}">
-        ${escapeHtml(displayName)}
+      <a href="${dashHref}" class="user-chip" aria-label="Account">
+        <span class="avatar">${escapeHtml(initialsFor(displayName))}</span>
+        <span>${escapeHtml(displayName)}</span>
       </a>
-      <button type="button" class="${cls} logout-btn" id="logout-btn">Logout</button>
+      <button type="button" class="btn btn-outline btn-sm" id="logout-btn">Logout</button>
     `;
   }
 
   return `
-    <a href="${CONFIG.ROUTES.LOGIN}" class="${cls}">Login</a>
-    <a href="${CONFIG.ROUTES.REGISTER}" class="btn btn-primary btn-sm">Sign up</a>
+    <a href="${CONFIG.ROUTES.LOGIN}" class="btn btn-outline btn-sm">Login</a>
+    <a href="${CONFIG.ROUTES.REGISTER}" class="btn btn-sm">Sign up</a>
   `;
 }
 
@@ -82,45 +103,35 @@ export function renderNavbar() {
   if (!host) return;
 
   host.innerHTML = `
-    <nav class="navbar" aria-label="Main navigation">
-      <div class="container navbar-inner">
-        <a href="/FloorballKenya/frontend/index.html" class="navbar-brand" aria-label="FloorballKenya home">
-          <img src="/FloorballKenya/frontend/assets/img/logo/image.png" alt="FloorballKenya" class="navbar-logo">
-               onerror="this.style.display='none'" />
-          <span class="navbar-brand-text">Floorball<span class="brand-accent">Kenya</span></span>
+    <header class="site-header" id="site-header">
+      <div class="container site-header__inner">
+        <a href="${BASE}/index.html" class="brand" aria-label="FloorballKenya home">
+          <img src="${BASE}/assets/img/logo/image.png" alt="FloorballKenya" onerror="this.style.display='none'" />
+          <span>Floorball<span class="brand-accent">Kenya</span></span>
         </a>
 
-        <div class="nav-links-desktop">
-          ${navLinksHtml(false)}
-        </div>
+        <nav class="site-nav" aria-label="Main navigation">
+          ${navLinksHtml()}
+        </nav>
 
-        <div class="nav-actions">
-          ${authAreaHtml(false)}
+        <div class="header-actions">
+          ${iconClusterHtml()}
+          ${authAreaHtml()}
           <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
             <span></span><span></span><span></span>
           </button>
         </div>
       </div>
-
-      <div class="mobile-menu" id="mobile-menu" hidden>
-        <div class="container mobile-menu-inner">
-          ${navLinksHtml(true)}
-          <div class="mobile-menu-divider"></div>
-          ${authAreaHtml(true)}
-        </div>
-      </div>
-    </nav>
+    </header>
   `;
 
-  // Mobile menu toggle
+  // Mobile menu toggle — toggles .open on .site-header itself
+  const header = document.getElementById("site-header");
   const toggle = document.getElementById("nav-toggle");
-  const menu = document.getElementById("mobile-menu");
-  if (toggle && menu) {
+  if (toggle && header) {
     toggle.addEventListener("click", () => {
-      const open = !menu.hidden;
-      menu.hidden = open;
-      toggle.setAttribute("aria-expanded", String(!open));
-      toggle.classList.toggle("open", !open);
+      const open = header.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", String(open));
     });
   }
 
@@ -130,7 +141,7 @@ export function renderNavbar() {
     logoutBtn.addEventListener("click", async () => {
       await logout();
       notify.success("You have been signed out.");
-      setTimeout(() => (window.location.href = "/index.html"), 400);
+      setTimeout(() => (window.location.href = `${BASE}/index.html`), 400);
     });
   }
 

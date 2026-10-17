@@ -17,19 +17,19 @@ export function renderFooter() {
       <div class="footer-grid">
         <div>
           <div class="footer-brand">
-            <img src="/assets/img/logo/logo.svg" alt=""
+            <img src="/FloorballKenya/frontend/assets/img/logo/image.png" alt=""
                  onerror="this.style.display='none'" />
             <span>Floorball<span class="brand-accent">Kenya</span></span>
           </div>
-          <p style="color: var(--fk-gray-400); font-size: var(--fs-sm); max-width: 360px;">
+          <p class="footer-tagline">
             The official platform for floorball in Kenya — leagues, teams, players,
             tournaments, and a marketplace built for the community.
           </p>
         </div>
 
-        <div>
+        <div class="footer-col">
           <h4>Explore</h4>
-          <ul style="display:grid; gap: var(--sp-2); font-size: var(--fs-sm);">
+          <ul>
             <li><a href="${CONFIG.ROUTES.LEAGUES}">Leagues</a></li>
             <li><a href="${CONFIG.ROUTES.TOURNAMENTS}">Tournaments</a></li>
             <li><a href="${CONFIG.ROUTES.TEAMS}">Teams</a></li>
@@ -37,18 +37,18 @@ export function renderFooter() {
           </ul>
         </div>
 
-        <div>
+        <div class="footer-col">
           <h4>Marketplace</h4>
-          <ul style="display:grid; gap: var(--sp-2); font-size: var(--fs-sm);">
+          <ul>
             <li><a href="${CONFIG.ROUTES.SHOP}">Shop</a></li>
             <li><a href="${CONFIG.ROUTES.CART}">Cart</a></li>
             <li><a href="${CONFIG.ROUTES.MY_ORDERS}">My Orders</a></li>
           </ul>
         </div>
 
-        <div>
+        <div class="footer-col">
           <h4>Company</h4>
-          <ul style="display:grid; gap: var(--sp-2); font-size: var(--fs-sm);">
+          <ul>
             <li><a href="${CONFIG.ROUTES.ABOUT}">About</a></li>
             <li><a href="${CONFIG.ROUTES.CONTACT}">Contact</a></li>
             <li><a href="${CONFIG.ROUTES.NEWS}">News</a></li>
