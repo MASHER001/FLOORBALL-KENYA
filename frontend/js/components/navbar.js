@@ -16,15 +16,14 @@ import { getSession, isLoggedIn, logout } from "../auth.js";
 import { escapeHtml, notify } from "../ui.js";
 
 const BASE = "/FloorballKenya/frontend";
-
 const NAV_LINKS = [
   { label: "Home",        href: "/FloorballKenya/frontend/index.html" },
   { label: "Leagues",     href: "/FloorballKenya/frontend/pages/sports/leagues.html" },
   { label: "Tournaments", href: "/FloorballKenya/frontend/pages/sports/tournaments.html" },
+  { label: "Marketplace", href: "/FloorballKenya/frontend/pages/shop/shop.html" },
   { label: "Teams",       href: "/FloorballKenya/frontend/pages/sports/teams.html" },
-  { label: "Players",     href: "/FloorballKenya/frontend/pages/sports/players.html" },
-  { label: "Shop",        href: "/FloorballKenya/frontend/pages/shop/shop.html" },
-  { label: "News",        href: "/FloorballKenya/frontend/pages/public/news.html" },
+  { label: "Gallery",     href: "/FloorballKenya/frontend/pages/public/gallery.html" },
+  { label: "About",       href: "/FloorballKenya/frontend/pages/public/about.html" },
 ];
 
 /** Are we currently on the page pointed to by `href`? */

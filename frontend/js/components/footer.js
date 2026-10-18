@@ -49,6 +49,7 @@ export function renderFooter() {
         <div class="footer-col">
           <h4>Company</h4>
           <ul>
+          <li><a href="${CONFIG.ROUTES.GALLERY}">Gallery</a></li>
             <li><a href="${CONFIG.ROUTES.ABOUT}">About</a></li>
             <li><a href="${CONFIG.ROUTES.CONTACT}">Contact</a></li>
             <li><a href="${CONFIG.ROUTES.NEWS}">News</a></li>

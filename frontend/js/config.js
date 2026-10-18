@@ -27,6 +27,7 @@ export const CONFIG = {
   CHECKOUT:          "/FloorballKenya/frontend/pages/shop/checkout.html",
   MY_ORDERS:         "/FloorballKenya/frontend/pages/shop/my-orders.html",
   NEWS:              "/FloorballKenya/frontend/pages/public/news.html",
+  GALLERY:           "/FloorballKenya/frontend/pages/public/gallery.html",
   ABOUT:             "/FloorballKenya/frontend/pages/public/about.html",
   CONTACT:           "/FloorballKenya/frontend/pages/public/contact.html",
   DASHBOARD_PLAYER:  "/FloorballKenya/frontend/pages/dashboard/player.html",
