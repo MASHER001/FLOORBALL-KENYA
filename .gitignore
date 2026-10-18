@@ -3,3 +3,10 @@
 .env
 backend/.env
 *.env
+.env
+backend/.env
+*.env
+!*.env.example
+create_superadmin.py
+server.log
+server_transcript.txt

@@ -74,6 +74,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 
@@ -90,19 +91,35 @@ async def add_process_time_header(request: Request, call_next):
 
 
 # ============================================================
-# Global exception handler (hides stack traces in prod)
+# Global exception handler with CORS headers
 # ============================================================
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request: Request, exc: Exception):
     logger.exception("Unhandled error on %s %s", request.method, request.url.path)
+
+    # Build the CORS headers manually so the browser doesn't misreport
+    # a 500 as a CORS error
+    origin = request.headers.get("origin")
+    cors_headers = {}
+    if origin and origin in settings.cors_origins:
+        cors_headers["Access-Control-Allow-Origin"] = origin
+        cors_headers["Access-Control-Allow-Credentials"] = "true"
+        cors_headers["Vary"] = "Origin"
+
     if settings.is_production:
         return JSONResponse(
             status_code=500,
             content={"detail": "Internal server error"},
+            headers=cors_headers,
         )
+
     return JSONResponse(
         status_code=500,
-        content={"detail": str(exc), "type": exc.__class__.__name__},
+        content={
+            "detail": str(exc),
+            "type": exc.__class__.__name__,
+        },
+        headers=cors_headers,
     )
 
 

@@ -42,16 +42,25 @@ export async function register(payload) {
 }
 
 export async function login({ email, password }) {
+  // Clear any stale token so it isn't sent in the Authorization header
+  clearSession();
+
   const session = await api.post("/auth/login", { email, password });
+
   saveSession({
-    access_token: session.access_token,
+    access_token:  session.access_token,
     refresh_token: session.refresh_token,
-    user: session.user,
+    user:          session.user,
   });
-  // Fetch full profile
-  const profile = await api.get("/auth/me");
-  saveSession({ user: profile });
-  return profile;
+
+  // Try to enrich with full profile, but don't fail login if it does
+  try {
+    const profile = await api.get("/auth/me");
+    saveSession({ user: profile });
+    return profile;
+  } catch {
+    return session.user;
+  }
 }
 
 export async function logout() {
@@ -68,7 +77,7 @@ export async function getCurrentUser() {
     localStorage.setItem(CONFIG.STORAGE_KEYS.USER, JSON.stringify(profile));
     return profile;
   } catch (err) {
-    if (err.status === 401) {
+    if (err.status === 401 || err.status === 403) {
       clearSession();
       return null;
     }
