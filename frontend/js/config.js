@@ -10,10 +10,20 @@ const IS_LOCAL = HOST === "localhost" || HOST === "127.0.0.1";
 // On Vercel the frontend folder is the site root, so no prefix is needed.
 export const BASE = IS_LOCAL ? "/FloorballKenya/frontend" : "";
 
+// ── API endpoints ───────────────────────────────────────────────
+// Swap PROD_API for the backend project's stable domain
+// (Vercel → backend project → Settings → Domains) when you have it.
+const LOCAL_API = "http://127.0.0.1:8000/api/v1";
+const PROD_API  = "https://floorball-kenya-254-4vvy4lptr-masher-001.vercel.app/api/v1";
+
+// Optional override for testing, e.g. Live Server against the deployed API:
+//   localStorage.setItem("fk_api_url", "https://.../api/v1"); location.reload();
+//   localStorage.removeItem("fk_api_url");                    location.reload();
+let apiOverride = null;
+try { apiOverride = localStorage.getItem("fk_api_url"); } catch { /* storage blocked */ }
+
 export const CONFIG = {
-  API_URL: IS_LOCAL
-    ? "http://127.0.0.1:8000/api/v1"
-    : "https://floorball-kenya-e6j7.vercel.app/api/v1",
+  API_URL: apiOverride || (IS_LOCAL ? LOCAL_API : PROD_API),
 
   STORAGE_KEYS: {
     TOKEN:        "fk_access_token",
