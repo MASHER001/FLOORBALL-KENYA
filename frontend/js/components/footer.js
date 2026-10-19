@@ -4,7 +4,7 @@
  * Renders into <footer id="footer"></footer>.
  */
 
-import { CONFIG } from "../config.js";
+import { CONFIG, BASE } from "../config.js";
 
 export function renderFooter() {
   const host = document.getElementById("footer");
@@ -17,7 +17,7 @@ export function renderFooter() {
       <div class="footer-grid">
         <div>
           <div class="footer-brand">
-            <img src="/FloorballKenya/frontend/assets/img/logo/image.png" alt=""
+            <img src="${BASE}/assets/img/logo/image.png" alt=""
                  onerror="this.style.display='none'" />
             <span>Floorball<span class="brand-accent">Kenya</span></span>
           </div>
@@ -49,7 +49,7 @@ export function renderFooter() {
         <div class="footer-col">
           <h4>Company</h4>
           <ul>
-          <li><a href="${CONFIG.ROUTES.GALLERY}">Gallery</a></li>
+            <li><a href="${CONFIG.ROUTES.GALLERY}">Gallery</a></li>
             <li><a href="${CONFIG.ROUTES.ABOUT}">About</a></li>
             <li><a href="${CONFIG.ROUTES.CONTACT}">Contact</a></li>
             <li><a href="${CONFIG.ROUTES.NEWS}">News</a></li>
