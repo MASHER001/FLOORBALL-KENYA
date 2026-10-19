@@ -4,11 +4,15 @@
  * A thin wrapper around fetch() that:
  *   · Prepends CONFIG.API_URL
  *   · Attaches the Bearer token if present
- *   · Throws on non-2xx
+ *   · Sends JSON (or FormData for uploads)
+ *   · Times out and retries GETs once (serverless cold starts)
+ *   · Throws ApiError on non-2xx / network failure
  *   · Parses JSON automatically
  */
 
 import { CONFIG } from "./config.js";
+
+const TIMEOUT_MS = 20000;
 
 export class ApiError extends Error {
   constructor(message, status, body) {
@@ -25,24 +29,76 @@ function getToken() {
   return t;
 }
 
-export async function apiFetch(path, options = {}) {
-  const url = `${CONFIG.API_URL}${path}`;
-  const token = getToken();
+function clearSession() {
+  Object.values(CONFIG.STORAGE_KEYS).forEach((k) => {
+    if (k !== CONFIG.STORAGE_KEYS.CART_GUEST) localStorage.removeItem(k);
+  });
+}
 
-  const headers = {
-    "Content-Type": "application/json",
-    ...(options.headers || {}),
-  };
-
-  if (token && !options.skipAuth) {
-    headers["Authorization"] = `Bearer ${token}`;
+/** Turn FastAPI's `detail` (string | list of validation errors) into text. */
+function errorMessage(body, fallback) {
+  const d = body && (body.detail ?? body.message);
+  if (!d) return fallback || "Request failed";
+  if (typeof d === "string") return d;
+  if (Array.isArray(d)) {
+    return d
+      .map((e) => {
+        const field = Array.isArray(e.loc) ? e.loc.slice(1).join(".") : "";
+        return field ? `${field}: ${e.msg}` : e.msg;
+      })
+      .join("; ");
   }
+  return JSON.stringify(d);
+}
 
-  let response;
+async function fetchWithTimeout(url, init) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
-    response = await fetch(url, { ...options, headers });
-  } catch (err) {
-    throw new ApiError("Network error — is the API running?", 0, null);
+    return await fetch(url, { ...init, signal: ctrl.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+export async function apiFetch(path, options = {}) {
+  const { skipAuth, headers: extraHeaders, ...fetchOptions } = options;
+  const method = (fetchOptions.method || "GET").toUpperCase();
+  const url = `${CONFIG.API_URL}${path.startsWith("/") ? path : "/" + path}`;
+  const token = skipAuth ? null : getToken();
+
+  const headers = { ...(extraHeaders || {}) };
+
+  // Only declare a JSON body when there is one (avoids needless CORS
+  // preflights on GETs). FormData must NOT get a Content-Type: the browser
+  // sets the multipart boundary itself.
+  const hasBody = fetchOptions.body !== undefined && fetchOptions.body !== null;
+  if (hasBody && !(fetchOptions.body instanceof FormData)) {
+    headers["Content-Type"] = headers["Content-Type"] || "application/json";
+  }
+  if (token) headers["Authorization"] = `Bearer ${token}`;
+
+  const init = { ...fetchOptions, method, headers };
+
+  // GETs are safe to retry once (cold start / dropped connection).
+  const attempts = method === "GET" ? 2 : 1;
+  let response;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      response = await fetchWithTimeout(url, init);
+      break;
+    } catch (err) {
+      if (i === attempts - 1) {
+        const timedOut = err && err.name === "AbortError";
+        throw new ApiError(
+          timedOut
+            ? "The server took too long to respond. Please try again."
+            : "Network error — please check your connection and try again.",
+          0,
+          null,
+        );
+      }
+    }
   }
 
   // No content (204)
@@ -57,12 +113,17 @@ export async function apiFetch(path, options = {}) {
   }
 
   if (!response.ok) {
-    const msg =
-      (body && (body.detail || body.message)) ||
-      response.statusText ||
-      "Request failed";
+    // Expired / invalid token: drop the session and send them to login.
+    // (Only when we actually sent a token, so wrong-password 401s on the
+    // login endpoint don't trigger this.)
+    if (response.status === 401 && token) {
+      clearSession();
+      if (!location.pathname.endsWith("/login.html")) {
+        location.href = CONFIG.ROUTES.LOGIN;
+      }
+    }
     throw new ApiError(
-      typeof msg === "string" ? msg : JSON.stringify(msg),
+      errorMessage(body, response.statusText),
       response.status,
       body,
     );
@@ -72,15 +133,18 @@ export async function apiFetch(path, options = {}) {
 }
 
 /* ---------- Convenience helpers ---------- */
+const jsonBody = (data) =>
+  data instanceof FormData ? data : JSON.stringify(data ?? {});
+
 export const api = {
   get:    (path, params, opts) =>
     apiFetch(path + buildQuery(params), { ...(opts || {}), method: "GET" }),
   post:   (path, data, opts) =>
-    apiFetch(path, { ...(opts || {}), method: "POST",   body: JSON.stringify(data) }),
+    apiFetch(path, { ...(opts || {}), method: "POST",  body: jsonBody(data) }),
   put:    (path, data, opts) =>
-    apiFetch(path, { ...(opts || {}), method: "PUT",    body: JSON.stringify(data) }),
+    apiFetch(path, { ...(opts || {}), method: "PUT",   body: jsonBody(data) }),
   patch:  (path, data, opts) =>
-    apiFetch(path, { ...(opts || {}), method: "PATCH",  body: JSON.stringify(data) }),
+    apiFetch(path, { ...(opts || {}), method: "PATCH", body: jsonBody(data) }),
   delete: (path, opts) =>
     apiFetch(path, { ...(opts || {}), method: "DELETE" }),
 };

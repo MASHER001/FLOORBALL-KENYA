@@ -3,8 +3,17 @@
  * =====================
  */
 
+const HOST = location.hostname;
+const IS_LOCAL = HOST === "localhost" || HOST === "127.0.0.1";
+
+// Live Server serves from the parent folder, so local paths need this prefix.
+// On Vercel the frontend folder is the site root, so no prefix is needed.
+export const BASE = IS_LOCAL ? "/FloorballKenya/frontend" : "";
+
 export const CONFIG = {
-  API_URL: "http://127.0.0.1:8000/api/v1",
+  API_URL: IS_LOCAL
+    ? "http://127.0.0.1:8000/api/v1"
+    : "https://floorball-kenya-e6j7.vercel.app/api/v1",
 
   STORAGE_KEYS: {
     TOKEN:        "fk_access_token",
@@ -14,27 +23,27 @@ export const CONFIG = {
   },
 
   ROUTES: {
-  HOME:              "/FloorballKenya/frontend/index.html",
-  LOGIN:             "/FloorballKenya/frontend/pages/auth/login.html",
-  REGISTER:          "/FloorballKenya/frontend/pages/auth/register.html",
-  LEAGUES:           "/FloorballKenya/frontend/pages/sports/leagues.html",
-  TOURNAMENTS:       "/FloorballKenya/frontend/pages/sports/tournaments.html",
-  TEAMS:             "/FloorballKenya/frontend/pages/sports/teams.html",
-  PLAYERS:           "/FloorballKenya/frontend/pages/sports/players.html",
-  MATCHES:           "/FloorballKenya/frontend/pages/sports/matches.html",
-  SHOP:              "/FloorballKenya/frontend/pages/shop/shop.html",
-  CART:              "/FloorballKenya/frontend/pages/shop/cart.html",
-  CHECKOUT:          "/FloorballKenya/frontend/pages/shop/checkout.html",
-  MY_ORDERS:         "/FloorballKenya/frontend/pages/shop/my-orders.html",
-  NEWS:              "/FloorballKenya/frontend/pages/public/news.html",
-  GALLERY:           "/FloorballKenya/frontend/pages/public/gallery.html",
-  ABOUT:             "/FloorballKenya/frontend/pages/public/about.html",
-  CONTACT:           "/FloorballKenya/frontend/pages/public/contact.html",
-  DASHBOARD_PLAYER:  "/FloorballKenya/frontend/pages/dashboard/player.html",
-  DASHBOARD_MANAGER: "/FloorballKenya/frontend/pages/dashboard/team-manager.html",
-  DASHBOARD_VENDOR:  "/FloorballKenya/frontend/pages/dashboard/vendor.html",
-  DASHBOARD_ADMIN:   "/FloorballKenya/frontend/pages/dashboard/admin.html",
-},
+    HOME:              `${BASE}/index.html`,
+    LOGIN:             `${BASE}/pages/auth/login.html`,
+    REGISTER:          `${BASE}/pages/auth/register.html`,
+    LEAGUES:           `${BASE}/pages/sports/leagues.html`,
+    TOURNAMENTS:       `${BASE}/pages/sports/tournaments.html`,
+    TEAMS:             `${BASE}/pages/sports/teams.html`,
+    PLAYERS:           `${BASE}/pages/sports/players.html`,
+    MATCHES:           `${BASE}/pages/sports/matches.html`,
+    SHOP:              `${BASE}/pages/shop/shop.html`,
+    CART:              `${BASE}/pages/shop/cart.html`,
+    CHECKOUT:          `${BASE}/pages/shop/checkout.html`,
+    MY_ORDERS:         `${BASE}/pages/shop/my-orders.html`,
+    NEWS:              `${BASE}/pages/public/news.html`,
+    GALLERY:           `${BASE}/pages/public/gallery.html`,
+    ABOUT:             `${BASE}/pages/public/about.html`,
+    CONTACT:           `${BASE}/pages/public/contact.html`,
+    DASHBOARD_PLAYER:  `${BASE}/pages/dashboard/player.html`,
+    DASHBOARD_MANAGER: `${BASE}/pages/dashboard/team-manager.html`,
+    DASHBOARD_VENDOR:  `${BASE}/pages/dashboard/vendor.html`,
+    DASHBOARD_ADMIN:   `${BASE}/pages/dashboard/admin.html`,
+  },
 
   CURRENCY: "KES",
 };
